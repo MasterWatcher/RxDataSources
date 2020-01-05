@@ -8,8 +8,14 @@
 
 import UIKit
 
+enum NestedType {
+    case none
+    case collection(sections: [CollectionSectionModel])
+}
+
 protocol TableItemType {
     var tableReuseIdentifier: String { get }
     var rowHeight: CGFloat { get }
+    var nestedType: NestedType { get }
     func configure(_ cell: UITableViewCell)
 }

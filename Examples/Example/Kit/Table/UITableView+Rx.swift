@@ -37,10 +37,13 @@ extension Reactive where Base: UITableView {
 
     var updateSize: Binder<Void> {
         return Binder(self.base) { tableView, _ in
-            DispatchQueue.main.async {
+           // DispatchQueue.main.async {
+                UIView.setAnimationsEnabled(false)
                 tableView.beginUpdates()
                 tableView.endUpdates()
-            }
+                UIView.setAnimationsEnabled(true)
+                tableView.scrollToRow(at: IndexPath(row: 4, section: 0), at: .bottom, animated: false)
+           // }
         }
     }
 }
