@@ -87,6 +87,7 @@
 		E447382623C1EAC20030C034 /* ObservableType+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = E447382523C1EAC20030C034 /* ObservableType+Operators.swift */; };
 		E447382823C1F16F0030C034 /* TableDirector+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E447382723C1F16F0030C034 /* TableDirector+Rx.swift */; };
 		E455DF76C924540C20F66A47 /* Pods_RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345F28D13244746273303187 /* Pods_RxDataSources.framework */; };
+		E4B318A523C324540086509A /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B318A423C324540086509A /* TextFieldCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +314,7 @@
 		E447382323C1E5A30030C034 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		E447382523C1EAC20030C034 /* ObservableType+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Operators.swift"; sourceTree = "<group>"; };
 		E447382723C1F16F0030C034 /* TableDirector+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableDirector+Rx.swift"; sourceTree = "<group>"; };
+		E4B318A423C324540086509A /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 				E447381B23C0F9690030C034 /* TextViewCell.swift */,
 				E447382123C1DC650030C034 /* EmbedCollectionCell.swift */,
 				E447382323C1E5A30030C034 /* TimeCell.swift */,
+				E4B318A423C324540086509A /* TextFieldCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1089,6 +1092,7 @@
 				E447382423C1E5A30030C034 /* TimeCell.swift in Sources */,
 				E447380A23C0E5790030C034 /* CollectionViewItemType.swift in Sources */,
 				E447381E23C0FE9A0030C034 /* SizeChangeableCell.swift in Sources */,
+				E4B318A523C324540086509A /* TextFieldCell.swift in Sources */,
 				E447382823C1F16F0030C034 /* TableDirector+Rx.swift in Sources */,
 				C8984CA01C36B6FA001E4272 /* Example2_RandomizedSectionsAnimation.swift in Sources */,
 				E447381323C0EBFC0030C034 /* CollectionSectionModel.swift in Sources */,

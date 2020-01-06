@@ -37,13 +37,22 @@ extension Reactive where Base: UITableView {
 
     var updateSize: Binder<Void> {
         return Binder(self.base) { tableView, _ in
-           // DispatchQueue.main.async {
-                UIView.setAnimationsEnabled(false)
-                tableView.beginUpdates()
-                tableView.endUpdates()
-                UIView.setAnimationsEnabled(true)
-                tableView.scrollToRow(at: IndexPath(row: 4, section: 0), at: .bottom, animated: false)
-           // }
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            tableView.scrollToRow(at: IndexPath(row: 4, section: 0), at: .bottom, animated: false)
         }
+    }
+
+    func configureKeyboard() -> Disposable {
+        return NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillChangeFrame)
+            .subscribe(onNext: { note in
+                if let newFrame = (note.userInfo?[ UIKeyboardFrameEndUserInfoKey ] as? NSValue)?.cgRectValue {
+                    let insets = UIEdgeInsetsMake( 0, 0, newFrame.height, 0 )
+                    self.base.contentInset = insets
+                    self.base.scrollIndicatorInsets = insets
+                }
+            })
     }
 }

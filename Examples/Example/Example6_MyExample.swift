@@ -28,6 +28,7 @@ class MyViewController: UIViewController {
         let labelItem = LabelCellViewModel(title: "Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet")
         let switchItem2 = TitleSwitchCellViewModel(title: "Switch2", isOn: false)
         let textViewItem = TextViewCellViewModel(title: "Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet")
+        let textFiledItem = TextFieldCellViewModel(title: "Tests")
 
         let nestedSections: [CollectionSectionModel] = [ CollectionSectionModel(items: [
             TimeCellViewModel(title: "09:00", image: image),
@@ -43,7 +44,7 @@ class MyViewController: UIViewController {
 
         let collectionItem = EmbedCollectionCellViewModel(nestedSections: nestedSections)
         let sections: [TableSectionModel] = [
-            TableSectionModel(title: "Test", items: [imageItem, switchItem, labelItem, switchItem2, textViewItem, collectionItem])
+            TableSectionModel(title: "Test", items: [imageItem, switchItem, labelItem, switchItem2, textViewItem, collectionItem, textFiledItem])
         ]
 
         let director = TableDirector()
@@ -52,6 +53,8 @@ class MyViewController: UIViewController {
             .bind(to: tableView.rx.items(director: director))
             .disposed(by: disposeBag)
         tableView.rx.setDelegate(director)
+            .disposed(by: disposeBag)
+        tableView.rx.configureKeyboard()
             .disposed(by: disposeBag)
 
         tableView.rx.viewModelSelected(ImageTitleCellViewModel.self)

@@ -409,6 +409,30 @@
                                             <outlet property="embedCollectionView" destination="KZb-Nn-fQZ" id="c8I-9X-2Sg"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="57" id="Zcc-Nw-k1f" customClass="TextFieldCell" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="463" width="375" height="57"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zcc-Nw-k1f" id="d7N-do-LkK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syI-Dc-EeC">
+                                                    <rect key="frame" x="24" y="8" width="327" height="41"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="syI-Dc-EeC" secondAttribute="trailing" constant="24" id="05a-w3-7G7"/>
+                                                <constraint firstAttribute="bottom" secondItem="syI-Dc-EeC" secondAttribute="bottom" constant="8" id="U00-pD-v8L"/>
+                                                <constraint firstItem="syI-Dc-EeC" firstAttribute="top" secondItem="d7N-do-LkK" secondAttribute="top" constant="8" id="VEj-pc-Ese"/>
+                                                <constraint firstItem="syI-Dc-EeC" firstAttribute="leading" secondItem="d7N-do-LkK" secondAttribute="leading" constant="24" id="YEu-Uv-IGY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="syI-Dc-EeC" id="BHZ-2Q-Ehq"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
