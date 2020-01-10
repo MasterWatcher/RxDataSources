@@ -36,13 +36,13 @@ extension Reactive where Base: UITableView {
             items(dataSource: director.dataSource)
     }
 
-    var updateSize: Binder<Void> {
-        return Binder(self.base) { tableView, _ in
+    var updateSize: Binder<IndexPath> {
+        return Binder(self.base) { tableView, indexPath in
             UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
-            tableView.scrollToRow(at: IndexPath(row: 4, section: 0), at: .bottom, animated: false)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
 

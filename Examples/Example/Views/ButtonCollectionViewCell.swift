@@ -18,7 +18,7 @@ struct ButtomCellViewModel: CollectionCellViewModel {
     let itemSize = CGSize(width: 75, height: 75)
 }
 
-class ButtonCollectionViewCell: UICollectionViewCell, ConfigurableCell, DisposableCell {
+class ButtonCollectionViewCell: UICollectionViewCell, ConfigurableCell {
 
     @IBOutlet weak var button: UIButton!
 

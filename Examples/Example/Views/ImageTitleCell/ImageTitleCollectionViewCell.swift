@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ImageTitleCollectionViewCell: UICollectionViewCell, ConfigurableCell, DisposableCell {
+class ImageTitleCollectionViewCell: UICollectionViewCell, ConfigurableCell {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

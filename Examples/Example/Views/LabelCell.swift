@@ -17,7 +17,7 @@ struct LabelCellViewModel: TableCellViewModel {
     let rowHeight = UITableViewAutomaticDimension
 }
 
-class LabelCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class LabelCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var titleLabel: UILabel!
 

@@ -17,7 +17,7 @@ struct TextViewCellViewModel: TableCellViewModel {
     let rowHeight = UITableViewAutomaticDimension
 }
 
-class TextViewCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class TextViewCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var textView: UITextView!
 

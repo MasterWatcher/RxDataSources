@@ -11,22 +11,24 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 
+typealias CollectionConfigurationData = (cell: UICollectionViewCell, item: AnyCollectionItem)
+
 class CollectionDirector: NSObject {
 
     typealias DataSource = RxCollectionViewSectionedAnimatedDataSource<CollectionSectionModel>
 
-    let cell = PublishRelay<UICollectionViewCell>()
+    let cellConfigured = PublishRelay<CollectionConfigurationData>()
+    private let animationConfiguration: AnimationConfiguration
+
+    init(animationConfiguration: AnimationConfiguration = .none) {
+        self.animationConfiguration = animationConfiguration
+    }
 
     lazy var dataSource: DataSource = {
-
-        let animationConfiguration = AnimationConfiguration(insertAnimation: .fade,
-                                                                  reloadAnimation: .fade,
-                                                                  deleteAnimation: .fade)
-
         let configureCell: DataSource.ConfigureCell = {(_, collectionView, indexPath, item) in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.collectionReuseIdentifier, for: indexPath)
             item.configure(cell)
-            self.cell.accept(cell)
+            self.cellConfigured.accept((cell, item))
             return cell
         }
         let dataSource = DataSource(animationConfiguration: animationConfiguration, configureCell: configureCell)

@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ImageTitleTableViewCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class ImageTitleTableViewCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

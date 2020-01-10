@@ -15,9 +15,16 @@ struct AddTimeCellViewModel: CollectionCellViewModel {
 
     typealias CollectionCellType = AddTimeCell
     let id: String = UUID().uuidString
-    let itemSize = CGSize(width: 50, height: 50)
+    let itemSize = CGSize(width: 72, height: 72)
 }
 
 class AddTimeCell: UICollectionViewCell, ConfigurableCell {
     func configure(with viewModel: AddTimeCellViewModel) {}
+
+    var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 }

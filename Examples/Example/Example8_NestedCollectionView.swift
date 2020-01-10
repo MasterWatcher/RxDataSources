@@ -31,8 +31,11 @@ class MyNestedCollectionController: UIViewController {
         let addTime = director.rx.nestedViewModelSelected(AddTimeCellViewModel.self, in: EmbedCollectionCell.self)
             .map { _ in Event.addItem }
 
-        let removeTime = director.rx.nestedViewModelSelected(TimeCellViewModel.self, in: EmbedCollectionCell.self)
-            .map { Event.deleteItem(id: $0.id) }
+        let removeTime =  director.rx.nestedCellCreated(TimeCell.self) { cell, item in
+            cell.closeButton.rx.tap
+                .map { item.id }
+            }
+            .map(Event.deleteItem)
 
         let initState = State(section: nestedSection)
 
@@ -50,12 +53,6 @@ class MyNestedCollectionController: UIViewController {
         tableView.rx.setDelegate(director)
             .disposed(by: disposeBag)
         tableView.rx.configureKeyboard()
-            .disposed(by: disposeBag)
-
-        director.rx.nestedCellCreated(TimeCell.self) { $0.closeButton.rx.tap }
-            .subscribe(onNext: { value in
-                print("close tap")
-            })
             .disposed(by: disposeBag)
     }
 

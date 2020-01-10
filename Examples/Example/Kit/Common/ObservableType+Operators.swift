@@ -16,6 +16,20 @@ extension ObservableType {
     }
 }
 
+extension ObservableType where E == CollectionConfigurationData {
+    func filterCast<T: ConfigurableCell>(_ type: T.Type) -> Observable<ConfigurationData<T>> {
+        filter { $0.cell is T && $0.item.item is T.ViewModel }
+            .map { ConfigurationData(cell: $0.cell as! T, item: $0.item.item as! T.ViewModel) }
+    }
+}
+
+extension ObservableType where E == TableConfigurationData {
+    func filterCast<T: ConfigurableCell>(_ type: T.Type) -> Observable<ConfigurationData<T>> {
+        filter { $0.cell is T && $0.item.item is T.ViewModel }
+            .map { ConfigurationData(cell: $0.cell as! T, item: $0.item.item as! T.ViewModel) }
+    }
+}
+
 extension ObservableType where E: DisposableCell {
     //Guarantee that any Observable from cell will be disposed by cell's disposeBag
     func flatMapAndDisposeInCell<U, O: ObservableType>(_ selector: @escaping (E) -> O) -> Observable<U> where O.E == U {
@@ -30,7 +44,6 @@ extension ObservableType where E: DisposableCell {
     }
 }
 
-
 extension ObservableType where E: CollectionContainableCell {
     //Guarantee that any Observable from cell will be disposed by cell's disposeBag
     func flatMapAndDisposeInCell<U, O: ObservableType>(_ selector: @escaping (E) -> O) -> Observable<U> where O.E == U {
@@ -40,6 +53,20 @@ extension ObservableType where E: CollectionContainableCell {
             newObservable.asObservable()
                 .bind(to: relay)
                 .disposed(by: cell.disposeBag)
+            return relay.asObservable()
+        }
+    }
+}
+
+extension ObservableType where E: ConfigurationDataType, E.T: DisposableCell {
+    //Guarantee that any Observable from cell will be disposed by cell's disposeBag
+    func flatMapAndDisposeInCell<U, O: ObservableType>(_ selector: @escaping (E) -> O) -> Observable<U> where O.E == U {
+        flatMap { data -> Observable<U> in
+            let newObservable = selector(data)
+            let relay = PublishRelay<U>()
+            newObservable.asObservable()
+                .bind(to: relay)
+                .disposed(by: data.cell.disposeBag)
             return relay.asObservable()
         }
     }

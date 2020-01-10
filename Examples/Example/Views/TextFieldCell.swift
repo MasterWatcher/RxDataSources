@@ -17,7 +17,7 @@ struct TextFieldCellViewModel: TableCellViewModel {
     let rowHeight: CGFloat = 57
 }
 
-class TextFieldCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class TextFieldCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var textField: UITextField!
 

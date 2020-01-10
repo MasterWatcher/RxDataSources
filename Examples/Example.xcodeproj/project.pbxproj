@@ -66,6 +66,7 @@
 		E4254F2123C7347700D142CE /* AddTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4254F2023C7347700D142CE /* AddTimeCell.swift */; };
 		E4254F2323C860C600D142CE /* CollectionDirector+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4254F2223C860C600D142CE /* CollectionDirector+Rx.swift */; };
 		E4254F2923C86E7F00D142CE /* AnimationConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4254F2823C86E7F00D142CE /* AnimationConfiguration+Extensions.swift */; };
+		E4254F2D23C891B200D142CE /* ConfigurationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4254F2C23C891B200D142CE /* ConfigurationData.swift */; };
 		E44737E623BB6C0B0030C034 /* Example6_MyExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44737E523BB6C0B0030C034 /* Example6_MyExample.swift */; };
 		E44737F023C0AAE60030C034 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44737EF23C0AAE60030C034 /* LabelCell.swift */; };
 		E44737F323C0B6280030C034 /* TableDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44737F223C0B6280030C034 /* TableDirector.swift */; };
@@ -301,6 +302,7 @@
 		E4254F2023C7347700D142CE /* AddTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimeCell.swift; sourceTree = "<group>"; };
 		E4254F2223C860C600D142CE /* CollectionDirector+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionDirector+Rx.swift"; sourceTree = "<group>"; };
 		E4254F2823C86E7F00D142CE /* AnimationConfiguration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationConfiguration+Extensions.swift"; sourceTree = "<group>"; };
+		E4254F2C23C891B200D142CE /* ConfigurationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationData.swift; sourceTree = "<group>"; };
 		E44737E523BB6C0B0030C034 /* Example6_MyExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example6_MyExample.swift; sourceTree = "<group>"; };
 		E44737EF23C0AAE60030C034 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		E44737F223C0B6280030C034 /* TableDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDirector.swift; sourceTree = "<group>"; };
@@ -627,12 +629,13 @@
 		E447381823C0F16C0030C034 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E44737F823C0B73E0030C034 /* ConfigurableCell.swift */,
 				E44737FC23C0B76A0030C034 /* DisposableCell.swift */,
+				E44737F823C0B73E0030C034 /* ConfigurableCell.swift */,
 				E447381D23C0FE9A0030C034 /* SizeChangeableCell.swift */,
 				E447381F23C1D7F10030C034 /* CollectionContainableCell.swift */,
 				E447382523C1EAC20030C034 /* ObservableType+Operators.swift */,
 				E4254F2823C86E7F00D142CE /* AnimationConfiguration+Extensions.swift */,
+				E4254F2C23C891B200D142CE /* ConfigurationData.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1124,6 +1127,7 @@
 				E447380423C0BC0A0030C034 /* ImageTitleCollectionViewCell.swift in Sources */,
 				E447380623C0E4600030C034 /* TableCellViewModel.swift in Sources */,
 				E44737F023C0AAE60030C034 /* LabelCell.swift in Sources */,
+				E4254F2D23C891B200D142CE /* ConfigurationData.swift in Sources */,
 				E4B318BC23C32C390086509A /* NestedCollectionTableCellViewModel.swift in Sources */,
 				C88AC744214D9D6800C1A3E5 /* NumberSection.swift in Sources */,
 				84FC6BEE1CA4830A00D3C605 /* Example3_TableViewEditing.swift in Sources */,

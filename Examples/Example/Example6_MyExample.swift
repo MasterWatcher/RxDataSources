@@ -46,7 +46,7 @@ class MyViewController: UIViewController {
 
         let collectionItem = EmbedCollectionCellViewModel(id: "test", nestedSections: nestedSections)
 //        let initState = State(section: TableSectionModel(title: "Test", items: [imageItem, switchItem, switchItem2, textViewItem, collectionItem, textFiledItem]))
-        let initState = State(section: TableSectionModel(title: "Test", items: [imageItem]))
+        let initState = State(section: TableSectionModel(title: "Test", items: [imageItem, switchItem, switchItem2, textFiledItem, textViewItem]))
 
         let director = TableDirector(animationConfiguration: .shift)
 
@@ -85,6 +85,15 @@ class MyViewController: UIViewController {
             .subscribe(onNext: { value in
                 print("is on: \(value)")
             })
+            .disposed(by: disposeBag)
+
+        director.rx.cellCreated(TitleSwitchTableViewCell.self) { cell, item in
+            cell.switchControl.rx.isOn
+                .map { item.title! + " \($0)" }
+         }
+        .subscribe(onNext: { value in
+            print(value)
+        })
             .disposed(by: disposeBag)
 
         director.rx.cellSizeChanged(TextViewCell.self)

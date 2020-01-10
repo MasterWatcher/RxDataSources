@@ -18,7 +18,7 @@ struct EmbedCollectionCellViewModel: NestedCollectionTableCellViewModel {
     let rowHeight: CGFloat = 72
 }
 
-class EmbedCollectionCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class EmbedCollectionCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var embedCollectionView: UICollectionView!
 

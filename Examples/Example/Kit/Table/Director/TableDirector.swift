@@ -11,12 +11,14 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 
+typealias TableConfigurationData = (cell: UITableViewCell, item: AnyTableItem, indexPath: IndexPath)
+
 class TableDirector: NSObject {
 
     typealias DataSource = RxTableViewSectionedAnimatedDataSource<TableSectionModel>
 
-    lazy var collectionDirector = CollectionDirector()
-    let cell = PublishRelay<UITableViewCell>()
+    lazy var collectionDirector = CollectionDirector(animationConfiguration: .fade)
+    let cellConfigured = PublishRelay<TableConfigurationData>()
     private let animationConfiguration: AnimationConfiguration
 
     init(animationConfiguration: AnimationConfiguration = .none) {
@@ -24,14 +26,14 @@ class TableDirector: NSObject {
     }
 
     lazy var dataSource: DataSource = {
-        let configureCell: DataSource.ConfigureCell = {(_, tableView, _, item) in
+        let configureCell: DataSource.ConfigureCell = {(_, tableView, indexPath, item) in
             let cell = tableView.dequeueReusableCell(withIdentifier: item.tableReuseIdentifier)!
             item.configure(cell)
             switch item.nestedType {
             case .none: break
             case let .collection(sections): self.configureNestedCollection(with: cell, sections: sections)
             }
-            self.cell.accept(cell)
+            self.cellConfigured.accept((cell, item, indexPath))
             return cell
         }
 

@@ -21,7 +21,7 @@ struct TimeCellViewModel: CollectionCellViewModel {
     let itemSize = CGSize(width: 72, height: 72)
 }
 
-class TimeCell: UICollectionViewCell, ConfigurableCell, DisposableCell {
+class TimeCell: UICollectionViewCell, ConfigurableCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!

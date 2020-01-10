@@ -20,7 +20,7 @@ extension TitleSwitchCellViewModel: TableCellViewModel {
     typealias TableCellType = TitleSwitchTableViewCell
 }
 
-class TitleSwitchTableViewCell: UITableViewCell, ConfigurableCell, DisposableCell {
+class TitleSwitchTableViewCell: UITableViewCell, ConfigurableCell {
 
     @IBOutlet weak var switchControl: UISwitch!
     @IBOutlet weak var titleLabel: UILabel!

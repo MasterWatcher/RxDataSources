@@ -47,6 +47,14 @@ class MyCollectionViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
+        director.rx.cellCreated(ButtonCollectionViewCell.self) { cell, item in
+            cell.button.rx.tap
+                .map { item.title }
+            }
+            .subscribe(onNext: { value in
+                print(value)
+            })
+            .disposed(by: disposeBag)
     }
 
 }
