@@ -9,53 +9,20 @@
 import Foundation
 import UIKit
 
-protocol TableCellViewModel: TableItemType {
+protocol TableCellViewModel: TableItemType, Equatable {
+
     associatedtype TableCellType: ConfigurableCell & UITableViewCell where TableCellType.ViewModel == Self
-}
 
-protocol NestedCollectionTableCellViewModel: TableItemType {
-
-    associatedtype TableCellType: ConfigurableCell &
-        CollectionContainableCell &
-        UITableViewCell where TableCellType.ViewModel == Self
-
-    var nestedSections: [CollectionSectionModel] { get }
+    var id: String { get }
 }
 
 extension TableCellViewModel {
 
-    var tableReuseIdentifier: String {
-        String(describing: TableCellType.self)
-    }
+    var tableReuseIdentifier: String { String(describing: TableCellType.self) }
 
-    var rowHeight: CGFloat {
-        UITableViewAutomaticDimension
-    }
+    var rowHeight: CGFloat { UITableViewAutomaticDimension }
 
-    var nestedType: NestedType {
-        .none
-    }
+    var nestedType: NestedType { .none }
 
-    func configure(_ cell: UITableViewCell) {
-        (cell as? TableCellType)?.configure(with: self)
-    }
-}
-
-extension NestedCollectionTableCellViewModel {
-
-    var tableReuseIdentifier: String {
-        String(describing: TableCellType.self)
-    }
-
-    var rowHeight: CGFloat {
-        UITableViewAutomaticDimension
-    }
-
-    var nestedType: NestedType {
-        .collection(sections: nestedSections)
-    }
-
-    func configure(_ cell: UITableViewCell) {
-        (cell as? TableCellType)?.configure(with: self)
-    }
+    func configure(_ cell: UITableViewCell) { (cell as? TableCellType)?.configure(with: self) }
 }

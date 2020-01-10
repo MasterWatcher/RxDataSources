@@ -14,6 +14,9 @@ import Differentiator
 
 class MyViewController: UIViewController {
 
+    @IBOutlet weak var showButton: UIBarButtonItem!
+    @IBOutlet weak var hideButton: UIBarButtonItem!
+
     @IBOutlet weak var tableView: UITableView!
     let disposeBag = DisposeBag()
 
@@ -25,7 +28,6 @@ class MyViewController: UIViewController {
 
         let imageItem = ImageTitleCellViewModel(image: image, title: "General")
         let switchItem = TitleSwitchCellViewModel(title: "Switch", isOn: true)
-        let labelItem = LabelCellViewModel(title: "Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet")
         let switchItem2 = TitleSwitchCellViewModel(title: "Switch2", isOn: false)
         let textViewItem = TextViewCellViewModel(title: "Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet")
         let textFiledItem = TextFieldCellViewModel(title: "Tests")
@@ -42,14 +44,24 @@ class MyViewController: UIViewController {
             TimeCellViewModel(title: "22:00", image: image)
         ])]
 
-        let collectionItem = EmbedCollectionCellViewModel(nestedSections: nestedSections)
-        let sections: [TableSectionModel] = [
-            TableSectionModel(title: "Test", items: [imageItem, switchItem, labelItem, switchItem2, textViewItem, collectionItem, textFiledItem])
-        ]
+        let collectionItem = EmbedCollectionCellViewModel(id: "test", nestedSections: nestedSections)
+//        let initState = State(section: TableSectionModel(title: "Test", items: [imageItem, switchItem, switchItem2, textViewItem, collectionItem, textFiledItem]))
+        let initState = State(section: TableSectionModel(title: "Test", items: [imageItem]))
 
-        let director = TableDirector()
+        let director = TableDirector(animationConfiguration: .shift)
 
-        Observable.just(sections)
+        let showEvent = showButton.rx.tap.asObservable()
+            .map { Event.addItem }
+
+        let hideEvent = hideButton.rx.tap.asObservable()
+            .map { Event.deleteItem }
+
+        Observable.of(showEvent, hideEvent)
+            .merge()
+            .scan(initState, accumulator: reduce)
+            .startWith(initState)
+            .map { [$0.section] }
+            .share(replay: 1)
             .bind(to: tableView.rx.items(director: director))
             .disposed(by: disposeBag)
         tableView.rx.setDelegate(director)
@@ -84,5 +96,32 @@ class MyViewController: UIViewController {
                 print("close tap")
             })
             .disposed(by: disposeBag)
+    }
+
+    enum Event {
+        case addItem
+        case deleteItem
+    }
+
+    struct State {
+        var section: TableSectionModel
+    }
+
+    func reduce(state: State, event: Event) -> State {
+        switch event {
+        case .addItem:
+            var result = state
+            let labelItem = LabelCellViewModel(title: "Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet, Lorem Ipsum Dolor sit amet")
+            var items = state.section.items
+            items.append(AnyTableItem(labelItem))
+            result.section = TableSectionModel(original: state.section, items: items)
+            return result
+        case .deleteItem:
+            var result = state
+            var items = state.section.items
+            items.removeLast()
+            result.section = TableSectionModel(original: state.section, items: items)
+            return result
+        }
     }
 }

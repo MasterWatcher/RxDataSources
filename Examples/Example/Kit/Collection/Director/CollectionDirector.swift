@@ -13,11 +13,15 @@ import RxSwift
 
 class CollectionDirector: NSObject {
 
-    typealias DataSource = RxCollectionViewSectionedReloadDataSource<CollectionSectionModel>
+    typealias DataSource = RxCollectionViewSectionedAnimatedDataSource<CollectionSectionModel>
 
-    private let cell = PublishRelay<UICollectionViewCell>()
+    let cell = PublishRelay<UICollectionViewCell>()
 
     lazy var dataSource: DataSource = {
+
+        let animationConfiguration = AnimationConfiguration(insertAnimation: .fade,
+                                                                  reloadAnimation: .fade,
+                                                                  deleteAnimation: .fade)
 
         let configureCell: DataSource.ConfigureCell = {(_, collectionView, indexPath, item) in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.collectionReuseIdentifier, for: indexPath)
@@ -25,7 +29,7 @@ class CollectionDirector: NSObject {
             self.cell.accept(cell)
             return cell
         }
-        let dataSource = DataSource(configureCell: configureCell)
+        let dataSource = DataSource(animationConfiguration: animationConfiguration, configureCell: configureCell)
         return dataSource
     }()
 }
@@ -33,17 +37,5 @@ class CollectionDirector: NSObject {
 extension CollectionDirector: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return dataSource[indexPath].itemSize
-    }
-}
-
-extension CollectionDirector {
-    func cellCreated<T: DisposableCell,
-        U,
-        O: ObservableType>
-        (_ cellType: T.Type, closure: @escaping (T) -> O) -> Observable<U>
-        where O.E == U {
-            return cell
-                .filterCast(T.self)
-                .flatMapAndDisposeInCell(closure)
     }
 }

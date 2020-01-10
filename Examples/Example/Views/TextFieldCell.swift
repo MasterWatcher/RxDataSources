@@ -12,6 +12,7 @@ import RxSwift
 struct TextFieldCellViewModel: TableCellViewModel {
     typealias TableCellType = TextFieldCell
 
+    let id = UUID().uuidString
     let title: String
     let rowHeight: CGFloat = 57
 }

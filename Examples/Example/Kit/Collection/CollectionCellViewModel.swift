@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol CollectionCellViewModel: CollectionItemType {
+protocol CollectionCellViewModel: CollectionItemType, Equatable {
     associatedtype CollectionCellType: ConfigurableCell & UICollectionViewCell where CollectionCellType.ViewModel == Self
 }
 

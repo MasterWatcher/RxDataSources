@@ -9,12 +9,22 @@
 import Foundation
 import RxDataSources
 
-struct CollectionSectionModel {
-    let items: [CollectionItemType]
+struct CollectionSectionModel: Equatable {
+    let id: String
+    let items: [AnyCollectionItem]
+
+    init(id: String = UUID().uuidString, items: [CollectionItemType]) {
+        self.id = id
+        self.items = items.map(AnyCollectionItem.init)
+    }
 }
 
-extension CollectionSectionModel: SectionModelType {
-    init(original: CollectionSectionModel, items: [CollectionItemType]) {
+extension CollectionSectionModel: AnimatableSectionModelType {
+
+    var identity: String { id }
+
+    init(original: CollectionSectionModel, items: [AnyCollectionItem]) {
+        self.id = original.id
         self.items = items
     }
 }

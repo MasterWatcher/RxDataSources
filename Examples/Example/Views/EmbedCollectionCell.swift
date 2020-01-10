@@ -13,6 +13,7 @@ struct EmbedCollectionCellViewModel: NestedCollectionTableCellViewModel {
 
     typealias TableCellType = EmbedCollectionCell
 
+    let id: String
     let nestedSections: [CollectionSectionModel]
     let rowHeight: CGFloat = 72
 }
@@ -23,12 +24,15 @@ class EmbedCollectionCell: UITableViewCell, ConfigurableCell, DisposableCell {
 
     var disposeBag = DisposeBag()
 
-    func configure(with viewModel: EmbedCollectionCellViewModel) {}
+    func configure(with viewModel: EmbedCollectionCellViewModel) {
+        
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
+        flowLayout.estimatedItemSize = CGSize(width: 72, height: 72)
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         flowLayout.minimumInteritemSpacing = 0.0
         collectionView.collectionViewLayout = flowLayout

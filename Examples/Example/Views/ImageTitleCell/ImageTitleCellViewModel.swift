@@ -9,11 +9,12 @@
 import UIKit
 
 struct ImageTitleCellViewModel {
+    let id = UUID().uuidString
     let image: UIImage?
     let title: String?
 }
 
-extension ImageTitleCellViewModel: TableCellViewModel {
+extension ImageTitleCellViewModel: TableCellViewModel, Equatable {
      typealias TableCellType = ImageTitleTableViewCell
 }
 

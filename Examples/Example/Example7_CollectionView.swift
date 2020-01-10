@@ -41,7 +41,7 @@ class MyCollectionViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        director.cellCreated(ButtonCollectionViewCell.self) { $0.button.rx.tap }
+        director.rx.cellCreated(ButtonCollectionViewCell.self) { $0.button.rx.tap }
             .subscribe(onNext: { _ in
                 print("tap!")
             })

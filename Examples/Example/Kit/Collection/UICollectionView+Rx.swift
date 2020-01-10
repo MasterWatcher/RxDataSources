@@ -27,7 +27,8 @@ extension Reactive where Base: UICollectionView {
     func viewModel<T>(at indexPath: IndexPath) -> T? {
         guard let dataSource = self.dataSource.forwardToDelegate() as? SectionedViewDataSourceType else { return nil }
         guard let viewModel = try? dataSource.model(at: indexPath) else { return nil }
-        return viewModel as? T
+        return (viewModel as? AnyCollectionItem)
+            .flatMap { $0.item as? T }
     }
 
     func items<O: ObservableType>(director: CollectionDirector) -> (_ source: O) -> Disposable
@@ -35,4 +36,3 @@ extension Reactive where Base: UICollectionView {
             items(dataSource: director.dataSource)
     }
 }
-

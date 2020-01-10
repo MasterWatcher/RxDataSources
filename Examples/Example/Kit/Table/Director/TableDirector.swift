@@ -13,13 +13,17 @@ import RxSwift
 
 class TableDirector: NSObject {
 
-    typealias DataSource = RxTableViewSectionedReloadDataSource<TableSectionModel>
+    typealias DataSource = RxTableViewSectionedAnimatedDataSource<TableSectionModel>
 
     lazy var collectionDirector = CollectionDirector()
     let cell = PublishRelay<UITableViewCell>()
+    private let animationConfiguration: AnimationConfiguration
+
+    init(animationConfiguration: AnimationConfiguration = .none) {
+        self.animationConfiguration = animationConfiguration
+    }
 
     lazy var dataSource: DataSource = {
-
         let configureCell: DataSource.ConfigureCell = {(_, tableView, _, item) in
             let cell = tableView.dequeueReusableCell(withIdentifier: item.tableReuseIdentifier)!
             item.configure(cell)
@@ -36,7 +40,9 @@ class TableDirector: NSObject {
             return section.title
         }
 
-        let dataSource = DataSource(configureCell: configureCell, titleForHeaderInSection: titleForHeaderInSection)
+        let dataSource = DataSource(animationConfiguration: animationConfiguration,
+                                    configureCell: configureCell,
+                                    titleForHeaderInSection: titleForHeaderInSection)
         return dataSource
     }()
 

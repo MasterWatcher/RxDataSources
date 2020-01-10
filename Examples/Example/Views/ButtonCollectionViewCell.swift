@@ -13,6 +13,7 @@ struct ButtomCellViewModel: CollectionCellViewModel {
 
     typealias CollectionCellType = ButtonCollectionViewCell
 
+    let id: String = UUID().uuidString
     let title: String
     let itemSize = CGSize(width: 75, height: 75)
 }

@@ -12,6 +12,7 @@ import RxSwift
 struct LabelCellViewModel: TableCellViewModel {
     typealias TableCellType = LabelCell
 
+    let id = UUID().uuidString
     let title: String
     let rowHeight = UITableViewAutomaticDimension
 }

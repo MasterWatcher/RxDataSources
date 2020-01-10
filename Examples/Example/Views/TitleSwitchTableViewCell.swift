@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 
 struct TitleSwitchCellViewModel {
+    let id = UUID().uuidString
     let title: String?
     let isOn: Bool
     let rowHeight: CGFloat = 55

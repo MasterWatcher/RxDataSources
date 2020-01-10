@@ -9,6 +9,7 @@
 import RxSwift
 
 extension Reactive where Base: TableDirector {
+
     func cellCreated<T: DisposableCell,
         U,
         O: ObservableType>
@@ -30,6 +31,12 @@ extension Reactive where Base: TableDirector {
         O: ObservableType>
         (_ cellType: T.Type, closure: @escaping (T) -> O) -> Observable<U>
         where O.E == U {
-            base.collectionDirector.cellCreated(T.self, closure: closure)
+            base.collectionDirector.rx.cellCreated(T.self, closure: closure)
+    }
+
+    func nestedViewModelSelected<T, C: CollectionContainableCell>(_ modelType: T.Type, in cellType: C.Type) -> Observable<T> {
+        return base.cell
+            .filterCast(C.self)
+            .flatMapAndDisposeInCell { $0.collectionView.rx.viewModelSelected(T.self) }
     }
 }

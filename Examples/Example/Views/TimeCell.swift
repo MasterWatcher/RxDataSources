@@ -15,6 +15,7 @@ struct TimeCellViewModel: CollectionCellViewModel {
 
     typealias CollectionCellType = TimeCell
 
+    let id: String = UUID().uuidString
     let title: String
     let image: UIImage
     let itemSize = CGSize(width: 72, height: 72)
